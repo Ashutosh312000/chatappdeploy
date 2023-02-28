@@ -200,7 +200,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
     socket.emit('new-user-joined',userid,username)
 
     chatnameh3.innerText=`${username}`;
-        const response= await  axios.get(`http://localhost:3000/group/getgroups`,{headers:{"Authorization" : token}})
+        const response= await  axios.get(`http://13.233.115.169:3000/group/getgroups`,{headers:{"Authorization" : token}})
         
         const groups=response.data
      
@@ -269,7 +269,7 @@ alreadygroups1.addEventListener('click',async(e)=>{
   
           const token=localStorage.getItem('token');
           const currentgroup=localStorage.getItem('currentgroup')
-          const response= await  axios.get(`http://localhost:3000/message/getmessage?lastmessageid=${lastmessageid}&groupid=${currentgroup}`,{headers:{"Authorization" : token}})
+          const response= await  axios.get(`http://13.233.115.169:3000/message/getmessage?lastmessageid=${lastmessageid}&groupid=${currentgroup}`,{headers:{"Authorization" : token}})
           
           
           let myarr = response.data;
@@ -306,7 +306,7 @@ alreadygroups1.addEventListener('click',async(e)=>{
                   let admininfo=[]
                   stringifiedadmininfo=JSON.stringify(admininfo)
                   localStorage.setItem('admininfo',stringifiedadmininfo)
-                 const admindetails= await  axios.get(`http://localhost:3000/message/getadmin?groupid=${currentgroup}`,{headers:{"Authorization" : token}})
+                 const admindetails= await  axios.get(`http://13.233.115.169:3000/message/getadmin?groupid=${currentgroup}`,{headers:{"Authorization" : token}})
                  
                   groupusers=admindetails.data[0].users
                  
@@ -399,7 +399,7 @@ groupsubmitbtn.addEventListener('click',async()=>{
         }
         socket.emit('join-room',groupname,participantsdetails)
     const token=localStorage.getItem('token');
-    const response= await  axios.post(`http://localhost:3000/group/postgroup`,{participantsdetails,groupname},{headers:{"Authorization" : token}})
+    const response= await  axios.post(`http://13.233.115.169:3000/group/postgroup`,{participantsdetails,groupname},{headers:{"Authorization" : token}})
        
     if(response.status==201){
     
@@ -429,7 +429,7 @@ async function send(e){
         socket.emit('sent-message',message,currentgroup);
 
         form.reset();
-        const response= await  axios.post(`http://localhost:3000/message/postmessage`,{message,currentgroup},{headers:{"Authorization" : token}})    
+        const response= await  axios.post(`http://13.233.115.169:3000/message/postmessage`,{message,currentgroup},{headers:{"Authorization" : token}})    
     }
     catch(err){
         console.log(err)
@@ -446,7 +446,7 @@ fileform.addEventListener('submit', async function (e) {
   const username=decodetoken.name;
   const groupId=localStorage.getItem('currentgroup');
   let formData = new FormData(fileform)
-  let response = await axios.post(`http://localhost:3000/message/postfile/${groupId}`, formData, { headers: { "Authorization": token, "Content-Type": "multipart/form-data" } });
+  let response = await axios.post(`http://13.233.115.169:3000/message/postfile/${groupId}`, formData, { headers: { "Authorization": token, "Content-Type": "multipart/form-data" } });
   let data = response.data
   console.log(username)
 
@@ -507,7 +507,7 @@ participantsdiv.addEventListener('click',async(e)=>{
         if(e.target.className=='remove_btn'){ 
             const alert1 = confirm("Are you sure want to Kick?");
             if(alert1==true){
-                const response= await  axios.put(`http://localhost:3000/admin/deleteparticipants`,{currentgroup,value},{headers:{"Authorization" : token}})
+                const response= await  axios.put(`http://13.233.115.169:3000/admin/deleteparticipants`,{currentgroup,value},{headers:{"Authorization" : token}})
                 alert(response.data.message)
               
                 if(response.status==200){
@@ -520,7 +520,7 @@ participantsdiv.addEventListener('click',async(e)=>{
         if(e.target.className=='makeadmin_btn'){
             const alert1 = confirm("Are you sure want to Make Admin?");
             if(alert1==true){
-            const response= await  axios.put(`http://localhost:3000/admin/makeparticipants`,{currentgroup,value},{headers:{"Authorization" : token}})
+            const response= await  axios.put(`http://13.233.115.169:3000/admin/makeparticipants`,{currentgroup,value},{headers:{"Authorization" : token}})
             alert(response.data.message)
 
             if(response.status==200){
@@ -532,7 +532,7 @@ participantsdiv.addEventListener('click',async(e)=>{
         if(e.target.className=='removeadmin'){
             const alert1 = confirm("Are you sure want to remove a Admin?");
             if(alert1==true){
-            const response= await  axios.put(`http://localhost:3000/admin/deleteasadmin`,{currentgroup,value},{headers:{"Authorization" : token}})
+            const response= await  axios.put(`http://13.233.115.169:3000/admin/deleteasadmin`,{currentgroup,value},{headers:{"Authorization" : token}})
             alert(response.data.message)
 
             if(response.status==200){
@@ -577,7 +577,7 @@ groupsubmitbtn1.addEventListener('click',async()=>{
    
    
     const token=localStorage.getItem('token');
-    const response= await  axios.post(`http://localhost:3000/admin/addAparticipant`,{participantsdetails,groupid},{headers:{"Authorization" : token}})
+    const response= await  axios.post(`http://13.233.115.169:3000/admin/addAparticipant`,{participantsdetails,groupid},{headers:{"Authorization" : token}})
     addgroups1.value=''
     if(response.status==200){
         alert(response.data.message)
@@ -643,7 +643,7 @@ leavegroup.addEventListener('click',async (e)=>{
         const token=localStorage.getItem('token');
         const decodetoken=parseJwt(token)
         const userid=decodetoken.userId;
-        const response= await  axios.put(`http://localhost:3000/admin/leavegroup`,{groupid},{headers:{"Authorization" : token}})
+        const response= await  axios.put(`http://13.233.115.169:3000/admin/leavegroup`,{groupid},{headers:{"Authorization" : token}})
         alert(response.data.message)
        if(response.status==200){
         socket.emit('leavegroup',userid,groupid)
@@ -660,7 +660,7 @@ deletegroup.addEventListener('click',async (e)=>{
     const token=localStorage.getItem('token');
     const decodetoken=parseJwt(token)
     const userid=decodetoken.userId;
-    const response= await  axios.put(`http://localhost:3000/admin/deletegroup`,{groupid},{headers:{"Authorization" : token}})
+    const response= await  axios.put(`http://13.233.115.169:3000/admin/deletegroup`,{groupid},{headers:{"Authorization" : token}})
               
     alert(response.data.message)
     if(response.status==200){
