@@ -49,6 +49,17 @@ body{
     flex-direction: column;
 }
 
+#chattoph3{
+    display: none;
+    color: white;
+    position: absolute;
+    left: 24px;
+}
+
+.chattop div:first-child {
+    margin-left: auto;
+  }
+
 .groupdiv{
     text-align: center;
     margin: 3%;

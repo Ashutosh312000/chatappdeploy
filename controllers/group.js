@@ -60,16 +60,17 @@ exports.postgroup=async(req,res,next)=>{
                 ]
                 
             }})
-           
+            let allusers=[];
             for(let i=0;i<users.length;i++){
                 let admin=false;
+                allusers.push(users[i].id);
                 if(users[i].id==req.user.id){
                     admin=true;
                 }
                await Usergroup.create({groupId:group.id,userId:users[i].id,isAdmin:admin})
             }
             
-            return res.status(201).json({message:'Group is created',group:group})
+            return res.status(201).json({message:'Group is created',group:group,allusers:allusers})
         }
        
       

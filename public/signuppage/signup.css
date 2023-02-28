@@ -9,16 +9,21 @@
 .input{
     background: transparent;
 }
-
 #section{
     display: flex;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
     width: 100vw;
-    background-color: #8b1d3e;
+    background-color: #54a8f0;
     background-repeat: no-repeat;
     background-size: cover;
     justify-content: space-around;
+}
+
+#heading{
+    color: white;
+    font-size: 400%;
 }
 
 

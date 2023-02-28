@@ -7,16 +7,6 @@ document.addEventListener('submitbtn', (e) => {
     e.preventDefault();
 });
 
-// const loginmessage=(message)=>{
-//     var loginMessage=document.createElement('div');
-//         loginMessage.className='loginmessage';
-//         loginMessage.textContent=`${message}`;
-//         form.insertBefore(loginMessage,submitbtn)
-
-//         setTimeout(() => {
-//             loginMessage.remove();
-//         }, 2000);
-// }
 
 async function  login(e){
     try{

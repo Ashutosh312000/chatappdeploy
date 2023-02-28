@@ -35,8 +35,8 @@ exports.postuser=(req,res,next)=>{
     
 }
 
-function generateAccessToken(id,name,phoneno){ 
-    return jwt.sign({userId:id,name:name,phoneno},'u3h437843hf374y3yrhdfy3487347843yfh##@#4dfdwdsd32d#$Q#@cr3w#')
+function generateAccessToken(id,name,phoneno,email){ 
+    return jwt.sign({userId:id,name:name,phoneno:phoneno,email:email},'u3h437843hf374y3yrhdfy3487347843yfh##@#4dfdwdsd32d#$Q#@cr3w#')
 }
 
 
@@ -51,7 +51,7 @@ exports.loginuser=(req,res,next)=>{
             if(user.length>0){
                 bcrypt.compare(password,user[0].Password,(err,result)=>{
                     if(result==true){
-                        return res.status(200).json({message:"login successfull",token: generateAccessToken(user[0].id,user[0].Name,user[0].Phone_No)});
+                        return res.status(200).json({message:"login successfull",token: generateAccessToken(user[0].id,user[0].Name,user[0].Phone_No,user[0].Email)});
                     }                                    
                     else{                                       
                         return res.status(401).json({message:"User not authorized"});

@@ -2,11 +2,8 @@
 const User = require('../models/user');
 const Message = require('../models/message');
 const Group = require('../models/group');
-const bcrypt = require('bcrypt');
 const sharp = require('sharp');
-const jwt = require('jsonwebtoken')
 const Sequelize = require('sequelize');
-const Usergroup = require('../models/usergroup');
 const Op = Sequelize.Op;
 const S3Services = require('../services/S3services')
 
@@ -52,7 +49,6 @@ exports.postFile = async (req, res) => {
 
             const buffer=await sharp(file).resize({height: 1920,width: 1080,fit:"contain"}).toBuffer();
 
-            // let contentname=req.file.originalname
 
             const filename = `GroupChat/${new Date()}.${type}`;
             const fileUrl = await S3Services.uploadtoS3(buffer, filename);

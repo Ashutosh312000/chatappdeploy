@@ -116,7 +116,7 @@ exports.addAparticipant=async(req,res,next)=>{
                                 res.status(202).json({message:'Participant Already Exists'})
                             }
                             else{
-                                res.status(201).json({message:'Participant is Added'})
+                                res.status(200).json({message:'Participant is Added',username:users[0].Name,user:users[0].id,groupname:getgroup.GroupName})
                                }
                            }
                            else{
